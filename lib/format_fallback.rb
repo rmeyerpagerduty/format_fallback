@@ -21,9 +21,9 @@ module ActionView
 =end
   
   class PathResolver
-    def find_templates_with_default(name, prefix, partial, details)
+    def find_templates_with_default(name, prefix, partial, details, outside_app_allowed = false)
       details[:formats] << :html unless details[:formats].include?(:html)
-      find_templates_without_default(name, prefix, partial, details)
+      find_templates_without_default(name, prefix, partial, details, outside_app_allowed)
     end
     alias_method_chain :find_templates, :default
   end
