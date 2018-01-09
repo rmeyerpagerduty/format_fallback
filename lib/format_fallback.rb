@@ -19,12 +19,16 @@ module ActionView
 
   end
 =end
-  
+
   class PathResolver
-    def find_templates_with_default(name, prefix, partial, details, outside_app_allowed = false)
+    # Rails 4 Upgrade
+    # ActionPack 4 does not specify 5th param. This is a breaking change
+    def find_templates_with_default(name, prefix, partial, details)
       details[:formats] << :html unless details[:formats].include?(:html)
-      find_templates_without_default(name, prefix, partial, details, outside_app_allowed)
+
+      find_templates_without_default(name, prefix, partial, details)
     end
+
     alias_method_chain :find_templates, :default
   end
 end
